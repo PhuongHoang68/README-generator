@@ -1,3 +1,18 @@
+const fs = require("fs");
+
+const writeFile = readMeMD => {
+  return new Promise((resolve, reject)=> {
+    fs.writeFile("./dist/newREADME.md", readMeMD, err=> {
+      if (err) {
+        reject(err);
+        return;
+      } resolve({
+        ok: true,
+        message: "Your ReadMe has been created!"
+      })
+    })
+  });
+}
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
 function renderLicenseBadge(license) {}
@@ -27,4 +42,5 @@ function generateMarkdown(data) {
 `;
 }
 
-module.exports = generateMarkdown;
+module.exports = {generateMarkdown, writeFile};
+
