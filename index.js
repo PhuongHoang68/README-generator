@@ -1,13 +1,15 @@
 // TODO: Include packages needed for this application
 const {writeFile} = require("./utils/generateMarkdown");
+
 const generateMarkdown = require("./utils/generateMarkdown")
+
 const inquirer = require("inquirer");
 // TODO: Create an array of questions for user input
-const questions = data => {
+const questions = () => {
     return inquirer.prompt ([
         {
             type: "input",
-            name: "Title",
+            name: "title",
             message: "What is the Title of your project?",
             validate: titleInput => {
                 if (titleInput) {
@@ -19,8 +21,14 @@ const questions = data => {
               }
         },
         {
+            type: "list",
+            name: "license",
+            message: "Which license will you use for your project?",
+            choices: ["agpl", "apache", "mit", "no license"]
+        },
+        {
             type: "input",
-            name: "Description",
+            name: "description",
             message: "Describe your project, and share some highlights.",
             validate: descriptionInput => {
                 if (descriptionInput) {
@@ -33,7 +41,7 @@ const questions = data => {
         },
         {
             type: "input",
-            name: "Installation",
+            name: "installation",
             message: "What is the installation guide?",
             validate: installationInput => {
                 if (installationInput) {
@@ -46,7 +54,7 @@ const questions = data => {
         },
         {
             type: "input",
-            name: "Usage",
+            name: "usage",
             message: "How do we use your project?",
             validate: usageInput => {
                 if (usageInput) {
@@ -59,12 +67,17 @@ const questions = data => {
         },
         {
             type: "input",
-            name: "Contribution",
+            name: "contribution",
             message: "Enter individuals who contributed on this project with you"
         },
         {
             type: "input",
-            name: "Questions",
+            name: "tests",
+            message: "Write tests for your application here!"
+        },
+        {
+            type: "input",
+            name: "questions",
             message: "Enter your Github username& link, as well your email in case of questions",
             validate: questionsInput => {
                 if (questionsInput) {
@@ -80,13 +93,14 @@ const questions = data => {
 
 questions()
 .then(data=> {
-    return generateMarkdown(data)
+    console.log(data);
+    return generateMarkdown.generateMarkdown(data);
 })
 .then(readMeMD => {
-    return fs.writeFile(readMeMD)
+    return generateMarkdown.writeFile(readMeMD);
 })
 .catch(err=> {
-    console.log(err)
+    console.log(err);
 });
 
 // TODO: Create a function to initialize app
