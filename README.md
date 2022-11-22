@@ -32,6 +32,8 @@
 
   ## Usage: 
   You only need to follow the prompts, and your ReadMe will be generated
+  [demo-proREADMEgen.webm](https://user-images.githubusercontent.com/109717048/203187312-fefc0bad-a50b-4a51-a7ea-6f3ab206a58c.webm)
+
 
 
 
